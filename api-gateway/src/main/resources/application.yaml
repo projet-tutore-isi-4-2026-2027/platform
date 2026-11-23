@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: account-micro-service
+              uri: http://account-micro-service:8080
+              predicates:
+                - Path=/api/account/**
+              filters:
+                - name: StripPrefix
+                  args:
+                    parts: 2
