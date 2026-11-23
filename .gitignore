@@ -18,3 +18,7 @@ target/
 
 # Logs
 *.log
+
+# Clés SSH générées localement (ne jamais commit de clé privée)
+deploy_key
+deploy_key.pub
