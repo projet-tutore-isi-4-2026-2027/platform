@@ -19,8 +19,6 @@ services:
       context: ./account
       dockerfile: Dockerfile
     container_name: account-micro-service
-    ports:
-      - "8081:8080"
     networks:
       - microservices-network
 
@@ -29,8 +27,6 @@ services:
       context: ./api-gateway
       dockerfile: Dockerfile
     container_name: api-gateway
-    ports:
-      - "8080:8080"
     networks:
       - microservices-network
 networks:

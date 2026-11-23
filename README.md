@@ -17,13 +17,14 @@ cd api-gateway && ./mvnw clean package -DskipTests && cd ..
 docker compose up -d --build
 ```
 
-- `api-gateway` → http://localhost:8080
-- `account-micro-service` → http://localhost:8081 (accessible directement, hors gateway)
+`api-gateway` et `account-micro-service` ne sont **pas** exposés sur l'hôte — seul `caddy` (reverse proxy HTTPS) publie des ports (80/443) et parle aux deux services via le réseau Docker interne.
 
-Tester le routage complet :
+Le [Caddyfile](Caddyfile) est configuré pour le domaine `vroum.duckdns.org` : Caddy n'obtient un certificat Let's Encrypt (et ne répond correctement) que pour ce nom de domaine précis, pas pour `localhost`. Pour tester en local sans passer par le domaine, republie temporairement le port de `api-gateway` dans `docker-compose.yaml`.
+
+En production :
 
 ```bash
-curl http://localhost:8080/api/account/ping
+curl https://vroum.duckdns.org/api/account/ping
 # -> account is up
 ```
 
